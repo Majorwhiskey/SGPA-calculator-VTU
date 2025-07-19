@@ -14,28 +14,30 @@ def get_grade_point(total_marks):
     else:
         return 0
 
-def calculate_sgpa():
+def input_subject_data():
     n = int(input("Enter number of subjects: "))
-    total_credit_points = 0
     total_credits = 0
+    total_credit_points = 0
 
+    print("\nSubject-wise Entry:")
     for i in range(n):
         print(f"\nSubject {i+1}")
-        title = input("  - Title: ")
-        code = input("  - Code: ")
-        credits = float(input("  - Credits: "))
-        internal = float(input("  - Internals (out of 40): "))
-        external = float(input("  - Externals (out of 60): "))
-        
-        total_marks = internal + external
-        grade_point = get_grade_point(total_marks)
-        credit_points = grade_point * credits
-        
-        total_credit_points += credit_points
+        title = input("  - Subject Title: ")
+        code = input("  - Subject Code: ")
+        credits = int(input("  - Credits: "))
+        internals = int(input("  - Internal Marks: "))
+        externals = int(input("  - External Marks: "))
+        total = internals + externals
+        grade_point = get_grade_point(total)
+        credit_point = grade_point * credits
+
+        print(f"    => Total: {total}, Grade Point: {grade_point}, Credit Point: {credit_point}")
         total_credits += credits
+        total_credit_points += credit_point
 
-    sgpa = total_credit_points / total_credits if total_credits > 0 else 0
-    print(f"\n🎓 Your SGPA is: {sgpa:.2f}")
+    sgpa = round(total_credit_points / total_credits, 4) if total_credits else 0
+    print(f"\n🎓 Final SGPA: {sgpa}")
 
-if __name__ == "__main__":
-    calculate_sgpa()
+# Run the script
+input_subject_data()
+
